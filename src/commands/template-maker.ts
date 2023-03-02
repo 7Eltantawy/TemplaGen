@@ -53,7 +53,7 @@ export const templateMaker = async (uri: Uri) => {
       selectedTemplate
     );
     window.showInformationMessage(
-      `${snakeCaseSubDirName} Successfully Generated | Tempalte: ${selectedTemplateName}`
+      `${snakeCaseSubDirName} Successfully Generated | Template: ${selectedTemplateName}`
     );
   } catch (error) {
     window.showErrorMessage(
