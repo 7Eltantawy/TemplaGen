@@ -1,4 +1,4 @@
-import { commands, ExtensionContext, languages, workspace } from "vscode";
+import { commands, ExtensionContext } from "vscode";
 import { templateMaker } from "./commands";
 
 export function activate(context: ExtensionContext) {
