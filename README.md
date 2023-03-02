@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/assets/icon.png" alt='HisnElmoslem logo'/>
+<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/assets/icon.png" alt='TemplaGen logo'/>
 
 # TemplaGen
 
