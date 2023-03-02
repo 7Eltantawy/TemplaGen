@@ -1,8 +1,18 @@
 {
   "name": "templagen",
   "displayName": "TemplaGen",
+  "icon": "assets/icon.png",
   "description": "Configure once create everywhere.",
   "version": "0.0.1",
+  "publisher": "HassanEltantawy",
+  "bugs": {
+    "url": "https://github.com/HasanEltantawy/TemplaGen/issues",
+    "email": "hasaneltantawy@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HasanEltantawy/TemplaGen"
+  },
   "engines": {
     "vscode": "^1.76.0"
   },
@@ -14,10 +24,52 @@
   "contributes": {
     "commands": [
       {
-        "command": "templagen.helloWorld",
-        "title": "Hello World"
+        "command": "extension.template-maker",
+        "title": "TemplaGen | Template Maker",
+        "shortTitle": "Template Maker",
+        "icon": "assets/icon.png"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.template-maker",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "TemplaGen",
+      "properties": {
+        "templagen.dirTemplates": {
+          "type": "array",
+          "default": [
+            {
+              "name": "Flutter Clean Code",
+              "needSubDir": true,
+              "dirs": {
+                "data": [
+                  "data_source",
+                  "models",
+                  "repository"
+                ],
+                "domain": [
+                  "entities",
+                  "use_cases",
+                  "repository"
+                ],
+                "presentation": [
+                  "components",
+                  "controller",
+                  "screens"
+                ]
+              }
+            }
+          ],
+          "description": "Directories templates."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -38,6 +90,16 @@
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
     "typescript": "^4.9.5",
-    "@vscode/test-electron": "^2.2.3"
+    "@vscode/test-electron": "^2.2.3",
+    "@types/lodash": "^4.14.121",
+    "@types/mkdirp": "^0.5.2"
+  },
+  "dependencies": {
+    "change-case": "^4.1.2",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.19",
+    "mkdirp": "^0.5.1",
+    "node-fetch": "^2.0.0",
+    "semver": "^6.3.0"
   }
 }
