@@ -4,7 +4,12 @@
   "icon": "assets/icon.png",
   "description": "Configure once create everywhere.",
   "version": "0.0.1",
-  "publisher": "HassanEltantawy",
+  "publisher": "7eltantawy",
+  "author": {
+    "name": "Hassan Eltantawy"
+  },
+  "homepage": "https://github.com/HasanEltantawy/TemplaGen/blob/main/README.md",
+  "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
     "url": "https://github.com/HasanEltantawy/TemplaGen/issues",
     "email": "hasaneltantawy@gmail.com"
@@ -18,6 +23,10 @@
   },
   "categories": [
     "Other"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
