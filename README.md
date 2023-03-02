@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/assets/icon.png" alt='TemplaGen logo'/>
+<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/main/assets/icon.png" alt='TemplaGen logo' height=100/>
 
 # TemplaGen
 
