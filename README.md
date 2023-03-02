@@ -1,71 +1,100 @@
-# templagen README
+<div align="center">
 
-This is the README for your extension "templagen". After writing up a brief description, we recommend including the following sections.
+<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/assets/icon.png" alt='HisnElmoslem logo'/>
 
-## Features
+# TemplaGen
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+[![version](https://img.shields.io/badge/version-0.0.1-gray.svg)](https://github.com/HasanEltantawy/TemplaGen/)
 
-For example if there is an image subfolder under your extension project workspace:
+Configure once create everywhere.
 
-\!\[feature X\]\(images/feature-x.png\)
+<div align="left">
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## How to use?
 
-## Requirements
+- Install extension.
+- Open vscode settings
+- search for `templagen`
+- Dir Templates `edit in json`
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## How to setup your own template?
 
-## Extension Settings
+- for example:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+  ```
+  {
+    "name": "Flutter Clean Code",
+    "needSubDir": true,
+    "dirs": {
+      "data": [
+        "data_source",
+        "models",
+        "repository"
+      ],
+      "domain": [
+        "entities",
+        "use_cases",
+        "repository"
+      ],
+      "presentation": [
+        "components",
+        "controller",
+        "screens"
+      ]
+    }
+  }
+  ```
 
-For example:
+- `name` is the name of template to be select when create template
 
-This extension contributes the following settings:
+  ```
+  "name": "Flutter Clean Code"
+  ```
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- `needSubDir` check wheter the template directories required subDir to created in or not.
 
-## Known Issues
+  - if `true` you'll be asked for subDir name.
+  - if `false` the dirs will be created directly.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+  ```
+  "needSubDir": true,
+  ```
 
-## Release Notes
+- `dirs` the dirs which will be created
+  ```
+    "dirs": {
+      "data": [
+        "data_source",
+        "models",
+        "repository"
+      ],
+      "domain": [
+        "entities",
+        "use_cases",
+        "repository"
+      ],
+      "presentation": [
+        "components",
+        "controller",
+        "screens"
+      ]
+    }
+  ```
 
-Users appreciate release notes as you update your extension.
+The output dir will be like
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+```
+|- <subDirName>
+    |- data
+    |  |- data_source
+    |  |- models
+    |  |- repository
+    |- domain
+    |  |- entities
+    |  |- use_cases
+    |  |- repository
+    |- presentation
+    |  |- components
+    |  |- controller
+    |  |- screens
+```
