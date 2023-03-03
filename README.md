@@ -13,12 +13,17 @@ Configure once create everywhere.
 ## How to use?
 
 - Install extension.
-- Open vscode settings
-- search for `templagen`
-- Dir Templates `edit in json`
+- Right click on any folder slecet `TemplaGen | Template Maker`.
+  - U can also write `TemplaGen | Template Maker` in command plaettte.
+  - Then select the path u want the template to be in.
+- Select template u want for example `Flutter clean code`.
+- You're done.
 
 ## How to setup your own template?
 
+- Open vscode settings
+- search for `templagen`
+- Dir Templates `edit in settings.json`
 - for example:
 
   ```
@@ -98,3 +103,13 @@ The output dir will be like
     |  |- controller
     |  |- screens
 ```
+
+## Note
+
+- U can use long path to define folders in folder like:
+  - `Fold/01/02/03/04`
+  - This will create Directory `Fold` and create `01` in it and create `02` in `01` and so on.
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/main/assets/7t.png" alt='Hassan Eltantawy logo' width="400"/>
