@@ -1,9 +1,10 @@
-# Change Log
+# v0.0.2
 
-All notable changes to the "templagen" extension will be documented in this file.
+- `[BUG FIX]` Not working in production.
+  - `extension.template-maker not found`
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+# v0.0.1
 
-## [Unreleased]
+- Initial Version of the Extension.
 
-- Initial release
+Configure once create everywhere.
