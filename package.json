@@ -50,6 +50,10 @@
     "configuration": {
       "title": "TemplaGen",
       "properties": {
+        "templagen.templatesFolderPath": {
+          "type": "string",
+          "description": "Path of folder that contain your templates."
+        },
         "templagen.dirTemplates": {
           "type": "array",
           "default": [
