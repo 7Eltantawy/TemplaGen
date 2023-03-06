@@ -1,14 +1,13 @@
 import * as _ from "lodash";
 import * as changeCase from "change-case";
-import * as mkdirp from "mkdirp";
-import { join } from "path";
-import { existsSync, lstatSync } from "fs";
+import { lstatSync } from "fs";
 import { Uri, window, workspace } from "vscode";
 import {
   promptForSelectedTemplate,
   promptForSubDirName,
   promptForTargetDirectory,
 } from "../utils";
+import { generateTemplateDirectories } from "../actions";
 
 export const templateMaker = async (uri: Uri) => {
   const config = workspace.getConfiguration("templagen");
@@ -61,48 +60,3 @@ export const templateMaker = async (uri: Uri) => {
     );
   }
 };
-
-async function generateTemplateDirectories(
-  subDirName: string | undefined,
-  targetDir: string,
-  template: Template
-) {
-  const moduleDirectoryPath = template.needSubDir
-    ? `${targetDir}/${subDirName}`
-    : `${targetDir}`;
-
-  if (!existsSync(moduleDirectoryPath)) {
-    await createDirectory(moduleDirectoryPath);
-  }
-
-  let dirs = template.dirs;
-
-  if (dirs) {
-    for (const [dirName, subDirs] of Object.entries(dirs)) {
-      const dirPath = join(moduleDirectoryPath, dirName);
-
-      if (!existsSync(dirPath)) {
-        await createDirectory(dirPath);
-      }
-
-      for (const subDirName of subDirs) {
-        const subDirPath = join(dirPath, subDirName);
-
-        if (!existsSync(subDirPath)) {
-          await createDirectory(subDirPath);
-        }
-      }
-    }
-  }
-}
-
-function createDirectory(targetDirectory: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    mkdirp(targetDirectory, (error) => {
-      if (error) {
-        return reject(error);
-      }
-      resolve();
-    });
-  });
-}
