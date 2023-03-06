@@ -3,13 +3,12 @@ import * as changeCase from "change-case";
 import * as mkdirp from "mkdirp";
 import { join } from "path";
 import { existsSync, lstatSync } from "fs";
+import { Uri, window, workspace } from "vscode";
 import {
-  InputBoxOptions,
-  OpenDialogOptions,
-  Uri,
-  window,
-  workspace,
-} from "vscode";
+  promptForSelectedTemplate,
+  promptForSubDirName,
+  promptForTargetDirectory,
+} from "../utils";
 
 export const templateMaker = async (uri: Uri) => {
   const config = workspace.getConfiguration("templagen");
@@ -62,36 +61,6 @@ export const templateMaker = async (uri: Uri) => {
     );
   }
 };
-
-function promptForSelectedTemplate(
-  templates: Array<Template>
-): Thenable<string | undefined> {
-  const names = templates.map((template) => template.name);
-  return window.showQuickPick(names);
-}
-
-function promptForSubDirName(): Thenable<string | undefined> {
-  const moduleNamePromptOptions: InputBoxOptions = {
-    prompt: "SubDir Name",
-    placeHolder: "Home",
-  };
-  return window.showInputBox(moduleNamePromptOptions);
-}
-
-async function promptForTargetDirectory(): Promise<string | undefined> {
-  const options: OpenDialogOptions = {
-    canSelectMany: false,
-    openLabel: "Select a folder to create the Module in",
-    canSelectFolders: true,
-  };
-
-  return window.showOpenDialog(options).then((uri) => {
-    if (_.isNil(uri) || _.isEmpty(uri)) {
-      return undefined;
-    }
-    return uri[0].fsPath;
-  });
-}
 
 async function generateTemplateDirectories(
   subDirName: string | undefined,
