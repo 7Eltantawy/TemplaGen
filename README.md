@@ -4,7 +4,7 @@
 
 # TemplaGen
 
-[![version](https://img.shields.io/badge/version-0.0.3-gray.svg)](https://github.com/HasanEltantawy/TemplaGen/)
+[![version](https://img.shields.io/badge/version-0.0.4-gray.svg)](https://github.com/HasanEltantawy/TemplaGen/)
 
 Configure once create everywhere.
 
