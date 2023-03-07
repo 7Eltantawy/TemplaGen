@@ -3,6 +3,7 @@ import {
   TemplateBase,
   JsonTemplate,
   FolderTemplate,
+  Replacer,
 } from "../interfaces/template";
 import * as fs from "fs";
 import { folderTemplateSettingsFileName } from "../utils";
@@ -48,6 +49,7 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
           name,
           settings.needSubDir,
           settings.subDirNameCase,
+          settings.foldersFilesNamesReplacer,
           path
         );
       });
@@ -78,6 +80,7 @@ function getFolderNamesInPath(path: string): string[] {
 type SettingsData = {
   needSubDir: boolean | undefined;
   subDirNameCase: string | undefined;
+  foldersFilesNamesReplacer?: Replacer[] | undefined;
 };
 
 function getTemplateSettings(path: string): SettingsData {

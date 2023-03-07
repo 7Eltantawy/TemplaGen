@@ -55,8 +55,20 @@ function detailMaker(template: TemplateBase): string {
 
 export function promptForSubDirName(): Thenable<string | undefined> {
   const moduleNamePromptOptions: InputBoxOptions = {
+    title: "Write a name for SubDir folder",
     prompt: "SubDir Name",
     placeHolder: "Home",
+  };
+  return window.showInputBox(moduleNamePromptOptions);
+}
+
+export function promptForReplacerName(
+  nameToReplace: string
+): Thenable<string | undefined> {
+  const moduleNamePromptOptions: InputBoxOptions = {
+    title: `Write a name to replace ${nameToReplace}`,
+    prompt: `Replace ${nameToReplace} with`,
+    placeHolder: nameToReplace,
   };
   return window.showInputBox(moduleNamePromptOptions);
 }

@@ -5,6 +5,7 @@ import { FolderTemplate } from "../interfaces/template";
 import ncp = require("ncp");
 import path = require("path");
 import { folderTemplateSettingsFileName } from "../utils";
+import { processReplacer } from "./replacer/replacer-process";
 
 export async function generateFolderTemplateDirectories(
   subDirName: string | undefined,
@@ -23,8 +24,14 @@ export async function generateFolderTemplateDirectories(
     return path.basename(source) !== folderTemplateSettingsFileName;
   };
 
-  console.log(moduleDirectoryPath);
-  console.log(template.path);
+  await ncp(
+    template.path,
+    moduleDirectoryPath,
+    { filter: filterFunc },
+    async (_) => {
+      await processReplacer(subDirName, moduleDirectoryPath, template);
+    }
+  );
 
-  ncp(template.path, moduleDirectoryPath, { filter: filterFunc }, (_) => {});
+  console.log(template.foldersFilesNamesReplacer);
 }
