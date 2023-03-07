@@ -3,7 +3,7 @@
   "displayName": "TemplaGen",
   "icon": "assets/icon.png",
   "description": "Configure once create everywhere.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "7eltantawy",
   "author": {
     "name": "Hassan Eltantawy"
@@ -28,6 +28,13 @@
     "ui",
     "workspace"
   ],
+  "keywords": [
+    "Templates",
+    "Template generator",
+    "Folder template",
+    "Structure template",
+    "Clean code folders"
+  ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -43,7 +50,8 @@
       "explorer/context": [
         {
           "command": "extension.template-maker",
-          "when": "explorerResourceIsFolder"
+          "when": "explorerResourceIsFolder",
+          "group": "templagen"
         }
       ]
     },
@@ -60,6 +68,7 @@
             {
               "name": "Flutter Clean Code",
               "needSubDir": true,
+              "subDirNameCase": "snakeCase",
               "dirs": {
                 "data": [
                   "data_source",

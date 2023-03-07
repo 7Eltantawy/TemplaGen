@@ -141,4 +141,4 @@ The output dir will be like
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/main/assets/7t.png" alt='Hassan Eltantawy logo' width="400"/>
+<img src="https://raw.githubusercontent.com/HasanEltantawy/TemplaGen/main/assets/7t.png" alt='Hassan Eltantawy logo' width="200"/>
