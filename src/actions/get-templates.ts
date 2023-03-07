@@ -5,6 +5,7 @@ import {
   FolderTemplate,
 } from "../interfaces/template";
 import * as fs from "fs";
+import { folderTemplateSettingsFileName } from "../utils";
 
 export function getTemplates(): Array<TemplateBase> {
   let templates: Array<TemplateBase> = [];
@@ -37,9 +38,19 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
     if (templatesPath) {
       const foldersName = getFolderNamesInPath(templatesPath);
 
-      templates = foldersName.map(
-        (name) => new FolderTemplate(name, false, `${templatesPath}\\${name}`)
-      );
+      templates = foldersName.map((name) => {
+        const path: string = `${templatesPath}\\${name}`;
+        const settingFilePath: string = `${path}\\${folderTemplateSettingsFileName}`;
+
+        const settings: SettingsData = getTemplateSettings(settingFilePath);
+
+        return new FolderTemplate(
+          name,
+          settings.needSubDir,
+          settings.subDirNameCase,
+          path
+        );
+      });
     }
   } catch (error) {
     window.showErrorMessage(
@@ -56,8 +67,36 @@ function getFolderNamesInPath(path: string): string[] {
     .readdirSync(path, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .filter((dirent) =>
-      fs.existsSync(`${path}\\${dirent.name}\\templagen.json`)
+      fs.existsSync(
+        `${path}\\${dirent.name}\\${folderTemplateSettingsFileName}`
+      )
     )
     .map((dirent) => dirent.name);
   return folders;
+}
+
+type SettingsData = {
+  needSubDir: boolean | undefined;
+  subDirNameCase: string | undefined;
+};
+
+function getTemplateSettings(path: string): SettingsData {
+  const dummy = {
+    needSubDir: false,
+    subDirNameCase: "",
+  };
+  try {
+    const fileContents = fs.readFileSync(path, "utf8");
+    if (fileContents) {
+      const data = JSON.parse(fileContents) as SettingsData;
+      return data;
+    }
+    return dummy;
+  } catch (error) {
+    window.showErrorMessage(
+      `Error:
+        ${error instanceof Error ? error.message : JSON.stringify(error)}`
+    );
+    return dummy;
+  }
 }

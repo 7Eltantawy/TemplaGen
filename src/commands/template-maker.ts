@@ -1,5 +1,4 @@
 import * as _ from "lodash";
-import * as changeCase from "change-case";
 import { lstatSync } from "fs";
 import { Uri, window } from "vscode";
 import {

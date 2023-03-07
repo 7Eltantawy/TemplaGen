@@ -4,6 +4,7 @@ import { createDirectory } from "./create-dir";
 import { FolderTemplate } from "../interfaces/template";
 import ncp = require("ncp");
 import path = require("path");
+import { folderTemplateSettingsFileName } from "../utils";
 
 export async function generateFolderTemplateDirectories(
   subDirName: string | undefined,
@@ -19,8 +20,11 @@ export async function generateFolderTemplateDirectories(
   }
 
   const filterFunc = (source: string): boolean => {
-    return path.basename(source) !== "templagen.json";
+    return path.basename(source) !== folderTemplateSettingsFileName;
   };
+
+  console.log(moduleDirectoryPath);
+  console.log(template.path);
 
   ncp(template.path, moduleDirectoryPath, { filter: filterFunc }, (_) => {});
 }

@@ -2,13 +2,18 @@ export class TemplateBase {
   constructor(
     public name: string,
     public needSubDir: boolean | undefined,
-    public subDirNameCase?: string
+    public subDirNameCase: string | undefined
   ) {}
 }
 
 export class FolderTemplate extends TemplateBase {
-  constructor(name: string, needSubDir: boolean, public path: string) {
-    super(name, needSubDir);
+  constructor(
+    name: string,
+    needSubDir: boolean | undefined,
+    subDirNameCase: string | undefined,
+    public path: string
+  ) {
+    super(name, needSubDir, subDirNameCase);
   }
 }
 
