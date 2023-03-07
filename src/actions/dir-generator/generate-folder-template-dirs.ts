@@ -32,6 +32,4 @@ export async function generateFolderTemplateDirectories(
       await processReplacer(subDirName, moduleDirectoryPath, template);
     }
   );
-
-  console.log(template.foldersFilesNamesReplacer);
 }

@@ -13,6 +13,7 @@ export class FolderTemplate extends TemplateBase {
     needSubDir: boolean | undefined,
     subDirNameCase: string | undefined,
     foldersFilesNamesReplacer: Replacer[] | undefined,
+    public filesContentReplacer: Replacer[] | undefined,
     public path: string
   ) {
     super(name, needSubDir, subDirNameCase, foldersFilesNamesReplacer);

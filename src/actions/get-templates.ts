@@ -50,6 +50,7 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
           settings.needSubDir,
           settings.subDirNameCase,
           settings.foldersFilesNamesReplacer,
+          settings.filesContentReplacer,
           path
         );
       });
@@ -81,6 +82,7 @@ type SettingsData = {
   needSubDir: boolean | undefined;
   subDirNameCase: string | undefined;
   foldersFilesNamesReplacer?: Replacer[] | undefined;
+  filesContentReplacer?: Replacer[] | undefined;
 };
 
 function getTemplateSettings(path: string): SettingsData {
