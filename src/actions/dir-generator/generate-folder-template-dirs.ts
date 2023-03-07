@@ -1,11 +1,11 @@
 import * as _ from "lodash";
 import { existsSync } from "fs";
 import { createDirectory } from "./create-dir";
-import { FolderTemplate } from "../interfaces/template";
+import { FolderTemplate } from "../../interfaces/template";
 import ncp = require("ncp");
 import path = require("path");
-import { folderTemplateSettingsFileName } from "../utils";
-import { processReplacer } from "./replacer/replacer-process";
+import { folderTemplateSettingsFileName } from "../../utils";
+import { processReplacer } from "../replacer/replacer-process";
 
 export async function generateFolderTemplateDirectories(
   subDirName: string | undefined,

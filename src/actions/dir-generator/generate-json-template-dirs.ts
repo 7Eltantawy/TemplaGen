@@ -2,8 +2,8 @@ import * as _ from "lodash";
 import { join } from "path";
 import { existsSync } from "fs";
 import { createDirectory } from "./create-dir";
-import { JsonTemplate } from "../interfaces/template";
-import { processFolderFilesNames } from "./replacer/replacer-process";
+import { JsonTemplate } from "../../interfaces/template";
+import { processFolderFilesNames } from "../replacer/replacer-process";
 
 export async function generateJsonTemplateDirectories(
   subDirName: string | undefined,

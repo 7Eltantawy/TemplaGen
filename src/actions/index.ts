@@ -1,4 +1,4 @@
-export * from "./create-dir";
-export * from "./generate-json-template-dirs";
+export * from "./dir-generator/create-dir";
+export * from "./dir-generator/generate-json-template-dirs";
 export * from "./get-templates";
-export * from "./generate-json-template-dirs";
+export * from "./dir-generator/generate-json-template-dirs";

@@ -13,7 +13,7 @@ import {
   JsonTemplate,
   FolderTemplate,
 } from "../interfaces/template";
-import { generateFolderTemplateDirectories } from "../actions/generate-folder-template-dirs";
+import { generateFolderTemplateDirectories } from "../actions/dir-generator/generate-folder-template-dirs";
 
 export const templateMaker = async (uri: Uri) => {
   const templates: TemplateBase[] = getTemplates();
