@@ -3,6 +3,7 @@ import * as changeCase from "change-case";
 import { lstatSync } from "fs";
 import { Uri, window } from "vscode";
 import {
+  keyCaseConvertor,
   promptForSelectedTemplate,
   promptForSubDirName,
   promptForTargetDirectory,
@@ -26,10 +27,10 @@ export const templateMaker = async (uri: Uri) => {
     return;
   }
 
-  let subDirName: string | undefined = "";
+  let rawSubDirName: string | undefined = "";
   if (selectedTemplate.needSubDir) {
-    subDirName = await promptForSubDirName();
-    if (_.isNil(subDirName) || subDirName.trim() === "") {
+    rawSubDirName = await promptForSubDirName();
+    if (_.isNil(rawSubDirName) || rawSubDirName.trim() === "") {
       window.showErrorMessage("The sub dir name must not be empty");
       return;
     }
@@ -46,26 +47,29 @@ export const templateMaker = async (uri: Uri) => {
     targetDirectory = uri.fsPath;
   }
 
+  let subDirName = rawSubDirName;
   //TODO depend on subDirCase
-  const snakeCaseSubDirName = changeCase.snakeCase(subDirName);
+  if (selectedTemplate.subDirNameCase) {
+    subDirName = keyCaseConvertor(selectedTemplate.subDirNameCase, subDirName);
+  }
 
   try {
     if (selectedTemplate instanceof JsonTemplate) {
       await generateJsonTemplateDirectories(
-        snakeCaseSubDirName,
+        subDirName,
         targetDirectory,
         selectedTemplate
       );
     } else if (selectedTemplate instanceof FolderTemplate) {
       await generateFolderTemplateDirectories(
-        snakeCaseSubDirName,
+        subDirName,
         targetDirectory,
         selectedTemplate
       );
     }
 
     window.showInformationMessage(
-      `${snakeCaseSubDirName} Successfully Generated | Template: ${selectedTemplate}`
+      `${subDirName} Successfully Generated | Template: ${selectedTemplate.name}`
     );
   } catch (error) {
     window.showErrorMessage(
