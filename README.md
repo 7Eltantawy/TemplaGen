@@ -4,7 +4,7 @@
 
 # TemplaGen
 
-[![version](https://img.shields.io/badge/version-0.0.2-gray.svg)](https://github.com/HasanEltantawy/TemplaGen/)
+[![version](https://img.shields.io/badge/version-0.0.3-gray.svg)](https://github.com/HasanEltantawy/TemplaGen/)
 
 Configure once create everywhere.
 
@@ -21,6 +21,27 @@ Configure once create everywhere.
 
 ## How to setup your own template?
 
+### Folder way
+
+- First
+  - Create Folder for templates anywhere on your device.
+  - Copy its path.
+  - Open vscode settings
+  - search for `templagen`
+  - Look for `templatesFolderPath` and paste path in it.
+- Second
+  - Create new Folder with any name you want.
+  - Make `templagen.json` inside the Folder
+  - ```
+    {
+      "needSubDir": false,
+      "subDirNameCase":"snakeCase"
+    }
+    ```
+  - Create any folders or files in the folder as you like.
+
+### Json way
+
 - Open vscode settings
 - search for `templagen`
 - Dir Templates `edit in settings.json`
@@ -30,6 +51,7 @@ Configure once create everywhere.
   {
     "name": "Flutter Clean Code",
     "needSubDir": true,
+    "subDirNameCase": "snakeCase",
     "dirs": {
       "data": [
         "data_source",
@@ -63,6 +85,13 @@ Configure once create everywhere.
 
   ```
   "needSubDir": true,
+
+  ```
+
+- `subDirNameCase` the name case you want
+
+  ```
+  "needSubDir": "snakeCase",
   ```
 
 - `dirs` the dirs which will be created
