@@ -1,3 +1,33 @@
+# v0.0.4
+
+- `[foldersFilesNamesReplacer]`: Define keys in folders and files to be replaced with subDir name or with a name you choose.
+  - Available for both `JsonTemplate` and `FolderTemplate`.
+- `[filesContentReplacer]`: Define keys inside file content to be replaced with subDir name or with a name you choose.
+  - Only available for `FolderTemplate`.
+
+```
+  "foldersFilesNamesReplacer": [
+    {
+      "case": "snakeCase",
+      "nameToReplcae": "key",
+      "useSubDirName": true
+    }
+  ],
+  "filesContentReplacer": [
+    {
+      "case": "snakeCase",
+      "nameToReplcae": "<{key_sc}>",
+      "useSubDirName": true
+    },
+    {
+      "case": "pascalCase",
+      "nameToReplcae": "<{key}>",
+      "useSubDirName": true
+    }
+  ]
+
+```
+
 # v0.0.3
 
 - Define path to generate templates from Local folder.

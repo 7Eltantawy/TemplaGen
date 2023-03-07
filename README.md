@@ -30,14 +30,36 @@ Configure once create everywhere.
   - search for `templagen`
   - Look for `templatesFolderPath` and paste path in it.
 - Second
+
   - Create new Folder with any name you want.
   - Make `templagen.json` inside the Folder
   - ```
-    {
-      "needSubDir": false,
-      "subDirNameCase":"snakeCase"
-    }
+        {
+          "needSubDir": true,
+          "subDirNameCase": "snakeCase",
+          "foldersFilesNamesReplacer": [
+            {
+              "case": "snakeCase",
+              "nameToReplcae": "key",
+              "useSubDirName": true
+            }
+          ],
+          "filesContentReplacer": [
+            {
+              "case": "snakeCase",
+              "nameToReplcae": "<{key_sc}>",
+              "useSubDirName": true
+            },
+            {
+              "case": "pascalCase",
+              "nameToReplcae": "<{key}>",
+              "useSubDirName": true
+            }
+          ]
+        }
+
     ```
+
   - Create any folders or files in the folder as you like.
 
 ### Json way
