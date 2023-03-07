@@ -47,3 +47,8 @@ export interface Replacer {
   nameToReplcae: string;
   useSubDirName?: boolean | undefined;
 }
+
+export interface ReplacerBody {
+  nameToReplcae: string;
+  replaceWith: string;
+}

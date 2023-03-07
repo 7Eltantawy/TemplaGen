@@ -1,5 +1,9 @@
 import * as _ from "lodash";
-import { FolderTemplate, TemplateBase } from "../../interfaces/template";
+import {
+  FolderTemplate,
+  ReplacerBody,
+  TemplateBase,
+} from "../../interfaces/template";
 import { keyCaseConvertor, promptForReplacerName } from "../../utils";
 import { renameFilesContent } from "./rename-files-content";
 import { renameFilesAndFolders } from "./rename-Files-Folders";
@@ -51,6 +55,8 @@ async function processFilesContentNames(
   template: FolderTemplate
 ) {
   if (template.filesContentReplacer) {
+    const replacers: ReplacerBody[] = [];
+
     for (const item of template.filesContentReplacer) {
       let replaceWith = "";
       if (item.useSubDirName && template.needSubDir) {
@@ -63,11 +69,14 @@ async function processFilesContentNames(
         replaceWith = keyCaseConvertor(item.case, replaceWith);
       }
 
-      await renameFilesContent(
-        moduleDirectoryPath,
-        item.nameToReplcae,
-        replaceWith
-      );
+      replacers.push({
+        nameToReplcae: item.nameToReplcae,
+        replaceWith: replaceWith,
+      });
     }
+
+    console.log(replacers);
+
+    await renameFilesContent(moduleDirectoryPath, replacers);
   }
 }

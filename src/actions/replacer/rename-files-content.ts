@@ -1,22 +1,26 @@
 import { RelativePattern, workspace } from "vscode";
 
 import * as fs from "fs";
+import { ReplacerBody } from "../../interfaces/template";
 
 export async function renameFilesContent(
   rootPath: string,
-  nameToReplace: string,
-  replaceWith: string
+  replacers: ReplacerBody[]
 ): Promise<void> {
   const files = await workspace.findFiles(
     new RelativePattern(rootPath, "**/*")
   );
 
-  const searchPromises = files.map(async (fileUri) => {
-    const document = await workspace.openTextDocument(fileUri);
-    let text = document.getText();
-    text = text.replace(new RegExp(nameToReplace, "g"), replaceWith);
-    return fs.writeFileSync(fileUri.fsPath, text);
-  });
+  for (const fileUri of files) {
+    let fileContents = await fs.readFileSync(fileUri.fsPath, "utf8");
 
-  await Promise.all(searchPromises || []);
+    for (const replacer of replacers) {
+      fileContents = fileContents.replace(
+        RegExp(replacer.nameToReplcae, "g"),
+        replacer.replaceWith
+      );
+    }
+
+    await fs.writeFileSync(fileUri.fsPath, fileContents, "utf8");
+  }
 }
