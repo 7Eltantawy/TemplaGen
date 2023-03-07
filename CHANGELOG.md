@@ -1,3 +1,7 @@
+# v0.0.3
+
+- Define path to generate templates from Local folder.
+
 # v0.0.2
 
 - `[BUG FIX]` Not working in production.
