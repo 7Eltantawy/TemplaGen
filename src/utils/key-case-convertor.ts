@@ -16,8 +16,6 @@ export function keyCaseConvertor(keyCase: string, value: string): string {
       return changeCase.paramCase(value);
     case "pascalCase":
       return changeCase.pascalCase(value);
-    case "pathCase":
-      return changeCase.pathCase(value);
     case "sentenceCase":
       return changeCase.sentenceCase(value);
     case "snakeCase":
