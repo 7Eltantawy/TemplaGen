@@ -94,7 +94,29 @@ Configure once create everywhere.
   }
   ```
 
+The output dir will be like
+
+```
+|- <subDirName>
+    |- data
+    |  |- data_source
+    |  |- models
+    |  |- repository
+    |- domain
+    |  |- entities
+    |  |- use_cases
+    |  |- repository
+    |- presentation
+    |  |- components
+    |  |- controller
+    |  |- screens
+```
+
+## Docs
+
 - `name` is the name of template to be select when create template
+
+  - `JsonTemplate` only
 
   ```
   "name": "Flutter Clean Code"
@@ -116,50 +138,90 @@ Configure once create everywhere.
   "needSubDir": "snakeCase",
   ```
 
+- `foldersFilesNamesReplacer` define keys in dirs and files name to be replaced later
+
+  - `FolderTemplate` only
+
+  ```
+       {
+         "foldersFilesNamesReplacer": [
+           {
+             "case": "snakeCase",
+             "nameToReplcae": "key",
+             "useSubDirName": true
+           }
+         ]
+       }
+
+  ```
+
+- `filesContentReplacer` define keys inside files content to be replaced later
+
+  - `FolderTemplate` only
+
+  ```
+       {
+         "filesContentReplacer": [
+           {
+             "case": "snakeCase",
+             "nameToReplcae": "<{key_sc}>",
+             "useSubDirName": true
+           },
+           {
+             "case": "pascalCase",
+             "nameToReplcae": "<{key}>",
+             "useSubDirName": true
+           }
+         ]
+       }
+
+  ```
+
 - `dirs` the dirs which will be created
+
+  - `JsonTemplate` only
+  - U can use long path to define folders in folder like:
+    - `Fold/01/02/03/04`
+    - This will create Directory `Fold` and create `01` in it and create `02` in `01` and so on.
+
   ```
     "dirs": {
       "data": [
         "data_source",
         "models",
         "repository"
-      ],
-      "domain": [
-        "entities",
-        "use_cases",
-        "repository"
-      ],
-      "presentation": [
-        "components",
-        "controller",
-        "screens"
       ]
     }
   ```
 
-The output dir will be like
+### Replacer schema
+
+- `case`the case of the name to replace `nameToReplcae` with.
+- `nameToReplcae`the key you define to be replaced.
+- `useSubDirName` choose wheter to use the `subDirName` or not
+  - if set to `false` or `needSubDir` set to false you will be asked to enter a name to replace the key with
 
 ```
-|- <subDirName>
-    |- data
-    |  |- data_source
-    |  |- models
-    |  |- repository
-    |- domain
-    |  |- entities
-    |  |- use_cases
-    |  |- repository
-    |- presentation
-    |  |- components
-    |  |- controller
-    |  |- screens
+  {
+    "case": "snakeCase",
+    "nameToReplcae": "<{key_sc}>",
+    "useSubDirName": true
+  },
 ```
 
-## Note
+## Avaliable cases
 
-- U can use long path to define folders in folder like:
-  - `Fold/01/02/03/04`
-  - This will create Directory `Fold` and create `01` in it and create `02` in `01` and so on.
+- `camelCase`
+- `capitalCase`
+- `constantCase`
+- `dotCase`
+- `headerCase`
+- `noCase`
+- `paramCase`
+- `pascalCase`
+- `pathCase`
+- `sentenceCase`
+- `snakeCase`
 
 <div align="center">
 
