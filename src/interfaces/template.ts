@@ -24,9 +24,10 @@ export class JsonTemplate extends TemplateBase {
     name: string,
     needSubDir: boolean | undefined,
     subDirNameCase: string | undefined,
+    foldersFilesNamesReplacer: Replacer[] | undefined,
     public dirs: Record<string, string[]>
   ) {
-    super(name, needSubDir, subDirNameCase);
+    super(name, needSubDir, subDirNameCase, foldersFilesNamesReplacer);
   }
 
   static fromJson(json: any): JsonTemplate {
@@ -34,6 +35,7 @@ export class JsonTemplate extends TemplateBase {
       json.name,
       json.needSubDir,
       json.subDirNameCase,
+      json.foldersFilesNamesReplacer,
       json.dirs
     );
   }

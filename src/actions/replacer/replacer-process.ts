@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { FolderTemplate } from "../../interfaces/template";
+import { FolderTemplate, TemplateBase } from "../../interfaces/template";
 import { keyCaseConvertor, promptForReplacerName } from "../../utils";
 import { renameFilesAndFolders } from "./rename-Files-Folders";
 
@@ -13,10 +13,10 @@ export async function processReplacer(
   }
 }
 
-async function processFolderFilesNames(
+export async function processFolderFilesNames(
   subDirName: string | undefined,
   moduleDirectoryPath: string,
-  template: FolderTemplate
+  template: TemplateBase
 ) {
   if (template.foldersFilesNamesReplacer) {
     await template.foldersFilesNamesReplacer.forEach(async (item) => {
@@ -42,9 +42,3 @@ async function processFolderFilesNames(
     });
   }
 }
-
-// async function processFilesContentNames(
-//   subDirName: string | undefined,
-//   moduleDirectoryPath: string,
-//   template: FolderTemplate
-// ) {}
