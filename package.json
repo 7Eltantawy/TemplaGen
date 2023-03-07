@@ -3,7 +3,7 @@
   "displayName": "TemplaGen",
   "icon": "assets/icon.png",
   "description": "Configure once create everywhere.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "7eltantawy",
   "author": {
     "name": "Hassan Eltantawy"
@@ -101,6 +101,7 @@
     "@types/lodash": "^4.14.121",
     "@types/mkdirp": "^0.5.2",
     "@types/mocha": "^10.0.1",
+    "@types/ncp": "^2.0.5",
     "@types/node": "16.x",
     "@types/node-fetch": "^2.0.0",
     "@types/vscode": "^1.76.0",
@@ -118,6 +119,7 @@
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.19",
     "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
     "node-fetch": "^2.0.0",
     "semver": "^6.3.0"
   }

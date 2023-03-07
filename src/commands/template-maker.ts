@@ -1,27 +1,30 @@
 import * as _ from "lodash";
 import * as changeCase from "change-case";
 import { lstatSync } from "fs";
-import { Uri, window, workspace } from "vscode";
+import { Uri, window } from "vscode";
 import {
   promptForSelectedTemplate,
   promptForSubDirName,
   promptForTargetDirectory,
 } from "../utils";
-import { generateTemplateDirectories } from "../actions";
+import { generateJsonTemplateDirectories, getTemplates } from "../actions";
+import {
+  TemplateBase,
+  JsonTemplate,
+  FolderTemplate,
+} from "../interfaces/template";
+import { generateFolderTemplateDirectories } from "../actions/generate-folder-template-dirs";
 
 export const templateMaker = async (uri: Uri) => {
-  const config = workspace.getConfiguration("templagen");
-  const templates = config.get("dirTemplates") as Array<Template>;
+  const templates: TemplateBase[] = getTemplates();
 
-  const selectedTemplateName = await promptForSelectedTemplate(templates);
-  if (_.isNil(selectedTemplateName) || selectedTemplateName.trim() === "") {
+  const selectedTemplate: TemplateBase | undefined =
+    await promptForSelectedTemplate(templates);
+
+  if (!selectedTemplate) {
     window.showErrorMessage("Template must not be empty");
     return;
   }
-
-  const selectedTemplate: Template = templates.find(
-    (template: Template) => template.name === selectedTemplateName
-  )!;
 
   let subDirName: string | undefined = "";
   if (selectedTemplate.needSubDir) {
@@ -43,15 +46,26 @@ export const templateMaker = async (uri: Uri) => {
     targetDirectory = uri.fsPath;
   }
 
+  //TODO depend on subDirCase
   const snakeCaseSubDirName = changeCase.snakeCase(subDirName);
+
   try {
-    await generateTemplateDirectories(
-      snakeCaseSubDirName,
-      targetDirectory,
-      selectedTemplate
-    );
+    if (selectedTemplate instanceof JsonTemplate) {
+      await generateJsonTemplateDirectories(
+        snakeCaseSubDirName,
+        targetDirectory,
+        selectedTemplate
+      );
+    } else if (selectedTemplate instanceof FolderTemplate) {
+      await generateFolderTemplateDirectories(
+        snakeCaseSubDirName,
+        targetDirectory,
+        selectedTemplate
+      );
+    }
+
     window.showInformationMessage(
-      `${snakeCaseSubDirName} Successfully Generated | Template: ${selectedTemplateName}`
+      `${snakeCaseSubDirName} Successfully Generated | Template: ${selectedTemplate}`
     );
   } catch (error) {
     window.showErrorMessage(

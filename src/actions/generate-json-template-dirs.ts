@@ -2,11 +2,12 @@ import * as _ from "lodash";
 import { join } from "path";
 import { existsSync } from "fs";
 import { createDirectory } from "./create-dir";
+import { JsonTemplate } from "../interfaces/template";
 
-export async function generateTemplateDirectories(
+export async function generateJsonTemplateDirectories(
   subDirName: string | undefined,
   targetDir: string,
-  template: Template
+  template: JsonTemplate
 ) {
   const moduleDirectoryPath = template.needSubDir
     ? `${targetDir}/${subDirName}`
