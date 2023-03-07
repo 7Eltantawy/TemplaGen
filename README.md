@@ -209,7 +209,7 @@ The output dir will be like
   },
 ```
 
-## Avaliable cases
+## Available cases
 
 - `camelCase`
 - `capitalCase`
