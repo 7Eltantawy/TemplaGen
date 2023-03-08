@@ -1,3 +1,7 @@
+# v0.0.5
+
+- Change `nameToReplcae` to `nameToReplace`
+
 # v0.0.4
 
 - `[foldersFilesNamesReplacer]`: Define keys in folders and files to be replaced with subDir name or with a name you choose.
