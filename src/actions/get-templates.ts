@@ -7,6 +7,7 @@ import {
 } from "../interfaces/template";
 import * as fs from "fs";
 import { folderTemplateSettingsFileName } from "../utils";
+import * as _ from "lodash";
 
 export function getTemplates(): Array<TemplateBase> {
   let templates: Array<TemplateBase> = [];
@@ -45,8 +46,17 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
 
         const settings: SettingsData = getTemplateSettings(settingFilePath);
 
+        let templateName: string = name.trim();
+        if (
+          !_.isNil(settings.name) &&
+          !_.isEmpty(settings.name) &&
+          settings.name.trim()
+        ) {
+          templateName = settings.name.trim();
+        }
+
         return new FolderTemplate(
-          name,
+          templateName,
           settings.needSubDir,
           settings.subDirNameCase,
           settings.foldersFilesNamesReplacer,
@@ -79,6 +89,7 @@ function getFolderNamesInPath(path: string): string[] {
 }
 
 type SettingsData = {
+  name?: string | undefined;
   needSubDir: boolean | undefined;
   subDirNameCase: string | undefined;
   foldersFilesNamesReplacer?: Replacer[] | undefined;

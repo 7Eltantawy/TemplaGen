@@ -6,7 +6,6 @@
 
 ![Badge](https://img.shields.io/github/v/release/HasanEltantawy/TemplaGen)
 
-
 Configure once create everywhere.
 
 <div align="left">
@@ -36,6 +35,7 @@ Configure once create everywhere.
   - Make `templagen.json` inside the Folder
   - ```
         {
+          "name":"Flutter Bloc"
           "needSubDir": true,
           "subDirNameCase": "snakeCase",
           "foldersFilesNamesReplacer": [
@@ -117,7 +117,8 @@ The output dir will be like
 
 - `name` is the name of template to be select when create template
 
-  - `JsonTemplate` only
+  - `JsonTemplate` name of the template
+  - `FolderTemplate` overwrite folder name if not empty or whitespace
 
   ```
   "name": "Flutter Clean Code"
