@@ -33,7 +33,7 @@ export async function processFolderFilesNames(
       if (item.useSubDirName && template.needSubDir) {
         replaceWith = subDirName ?? "";
       } else {
-        replaceWith = (await promptForReplacerName(item.nameToReplcae)) ?? "";
+        replaceWith = (await promptForReplacerName(item.nameToReplace)) ?? "";
       }
 
       if (replaceWith && item.case) {
@@ -42,7 +42,7 @@ export async function processFolderFilesNames(
 
       await renameFilesAndFolders(
         moduleDirectoryPath,
-        item.nameToReplcae,
+        item.nameToReplace,
         replaceWith
       );
     });
@@ -62,7 +62,7 @@ async function processFilesContentNames(
       if (item.useSubDirName && template.needSubDir) {
         replaceWith = subDirName ?? "";
       } else {
-        replaceWith = (await promptForReplacerName(item.nameToReplcae)) ?? "";
+        replaceWith = (await promptForReplacerName(item.nameToReplace)) ?? "";
       }
 
       if (replaceWith && item.case) {
@@ -70,7 +70,7 @@ async function processFilesContentNames(
       }
 
       replacers.push({
-        nameToReplcae: item.nameToReplcae,
+        nameToReplace: item.nameToReplace,
         replaceWith: replaceWith,
       });
     }

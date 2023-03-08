@@ -40,19 +40,19 @@ Configure once create everywhere.
           "foldersFilesNamesReplacer": [
             {
               "case": "snakeCase",
-              "nameToReplcae": "key",
+              "nameToReplace": "key",
               "useSubDirName": true
             }
           ],
           "filesContentReplacer": [
             {
               "case": "snakeCase",
-              "nameToReplcae": "<{key_sc}>",
+              "nameToReplace": "<{key_sc}>",
               "useSubDirName": true
             },
             {
               "case": "pascalCase",
-              "nameToReplcae": "<{key}>",
+              "nameToReplace": "<{key}>",
               "useSubDirName": true
             }
           ]
@@ -147,7 +147,7 @@ The output dir will be like
          "foldersFilesNamesReplacer": [
            {
              "case": "snakeCase",
-             "nameToReplcae": "key",
+             "nameToReplace": "key",
              "useSubDirName": true
            }
          ]
@@ -164,12 +164,12 @@ The output dir will be like
          "filesContentReplacer": [
            {
              "case": "snakeCase",
-             "nameToReplcae": "<{key_sc}>",
+             "nameToReplace": "<{key_sc}>",
              "useSubDirName": true
            },
            {
              "case": "pascalCase",
-             "nameToReplcae": "<{key}>",
+             "nameToReplace": "<{key}>",
              "useSubDirName": true
            }
          ]
@@ -196,15 +196,15 @@ The output dir will be like
 
 ### Replacer schema
 
-- `case`the case of the name to replace `nameToReplcae` with.
-- `nameToReplcae`the key you define to be replaced.
+- `case`the case of the name to replace `nameToReplace` with.
+- `nameToReplace`the key you define to be replaced.
 - `useSubDirName` choose wheter to use the `subDirName` or not
   - if set to `false` or `needSubDir` set to false you will be asked to enter a name to replace the key with
 
 ```
   {
     "case": "snakeCase",
-    "nameToReplcae": "<{key_sc}>",
+    "nameToReplace": "<{key_sc}>",
     "useSubDirName": true
   },
 ```

@@ -16,7 +16,7 @@ export async function renameFilesContent(
 
     for (const replacer of replacers) {
       fileContents = fileContents.replace(
-        RegExp(replacer.nameToReplcae, "g"),
+        RegExp(replacer.nameToReplace, "g"),
         replacer.replaceWith
       );
     }

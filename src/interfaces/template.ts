@@ -44,11 +44,11 @@ export class JsonTemplate extends TemplateBase {
 
 export interface Replacer {
   case?: string | undefined;
-  nameToReplcae: string;
+  nameToReplace: string;
   useSubDirName?: boolean | undefined;
 }
 
 export interface ReplacerBody {
-  nameToReplcae: string;
+  nameToReplace: string;
   replaceWith: string;
 }
