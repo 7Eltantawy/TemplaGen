@@ -56,7 +56,9 @@ export async function getTemplatesFromTemplatesFolderPath(): Promise<
         const settings: FolderTemplateSettingsData =
           readTemplaGenJson(settingFilePath);
 
-        let templateName: string = name.trim();
+        let templateName: string = name
+          .trim()
+          .replace(new RegExp("/", "g"), " -> ");
         if (
           !_.isNil(settings.name) &&
           !_.isEmpty(settings.name) &&
