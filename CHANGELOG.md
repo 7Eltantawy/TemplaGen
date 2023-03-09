@@ -24,15 +24,11 @@
 - `listShowTemplatesGrouped`
   - When `templagen.json` name not exist show template name as the path it exist in.
 
----
-
 # v0.0.5
 
 #### Features
 
 - Change `nameToReplcae` to `nameToReplace`
-
----
 
 # v0.0.4
 
@@ -66,22 +62,16 @@
 
 ```
 
----
-
 # v0.0.3
 
 #### Features
 
 - Define path to generate templates from Local folder.
 
----
-
 # v0.0.2
 
 - `[BUG FIX]` Not working in production.
   - `extension.template-maker not found`
-
----
 
 # v0.0.1
 
