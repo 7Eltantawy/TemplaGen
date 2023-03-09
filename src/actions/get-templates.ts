@@ -12,12 +12,13 @@ import {
 } from "../utils";
 import * as _ from "lodash";
 import { readTemplaGenJson } from "./templagen-json-file";
+import { getAllFolderPaths } from "../utils/get-folders-paths";
 
-export function getTemplates(): Array<TemplateBase> {
+export async function getTemplates(): Promise<Array<TemplateBase>> {
   let templates: Array<TemplateBase> = [];
 
   const configTemplates = getTemplatesFromConfigTemplates();
-  const templatesFolderPath = getTemplatesFromTemplatesFolderPath();
+  const templatesFolderPath = await getTemplatesFromTemplatesFolderPath();
 
   templates = [...configTemplates, ...templatesFolderPath];
 
@@ -33,14 +34,16 @@ function getTemplatesFromConfigTemplates(): Array<JsonTemplate> {
   return templates;
 }
 
-export function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
+export async function getTemplatesFromTemplatesFolderPath(): Promise<
+  Array<FolderTemplate>
+> {
   let templates: Array<FolderTemplate> = [];
 
   try {
     const config = workspace.getConfiguration("templagen");
     const templatesPath: string = config.get("templatesFolderPath") as string;
     if (templatesPath) {
-      const foldersName = getFolderNamesInPath(templatesPath);
+      const foldersName = await getFolderNamesInPath(templatesPath);
 
       templates = foldersName.map((name) => {
         const path: string = `${templatesPath}\\${name}`;
@@ -79,18 +82,12 @@ export function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
   return templates;
 }
 
-function getFolderNamesInPath(path: string): string[] {
-  // TODO Imp nested folders
-  // Search all paths in folder until get templagen.json
-  // Return Name as [Path | SubPath | ... | Template Name]
-  const folders = fs
-    .readdirSync(path, { withFileTypes: true })
-    .filter((dirent) => dirent.isDirectory())
-    .filter((dirent) =>
-      fs.existsSync(
-        `${path}\\${dirent.name}\\${folderTemplateSettingsFileName}`
-      )
-    )
-    .map((dirent) => dirent.name);
-  return folders;
+async function getFolderNamesInPath(path: string): Promise<string[]> {
+  const folders = await getAllFolderPaths(path);
+
+  const filteredFolders = folders.filter((dirent) =>
+    fs.existsSync(`${path}\\${dirent}\\${folderTemplateSettingsFileName}`)
+  );
+
+  return filteredFolders;
 }

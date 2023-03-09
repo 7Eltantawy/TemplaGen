@@ -16,7 +16,7 @@ import {
 import { generateFolderTemplateDirectories } from "../actions/dir-generator/generate-folder-template-dirs";
 
 export const templateMaker = async (uri: Uri) => {
-  const templates: TemplateBase[] = getTemplates();
+  const templates: TemplateBase[] = await getTemplates();
 
   const selectedTemplate: TemplateBase | undefined =
     await promptForSelectedTemplate(templates);
