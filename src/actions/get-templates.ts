@@ -3,11 +3,15 @@ import {
   TemplateBase,
   JsonTemplate,
   FolderTemplate,
-  Replacer,
+  FolderTemplateSettingsData,
 } from "../interfaces/template";
 import * as fs from "fs";
-import { folderTemplateSettingsFileName } from "../utils";
+import {
+  configGetDirTemplates,
+  folderTemplateSettingsFileName,
+} from "../utils";
 import * as _ from "lodash";
+import { readTemplaGenJson } from "./templagen-json-file";
 
 export function getTemplates(): Array<TemplateBase> {
   let templates: Array<TemplateBase> = [];
@@ -21,9 +25,7 @@ export function getTemplates(): Array<TemplateBase> {
 }
 
 function getTemplatesFromConfigTemplates(): Array<JsonTemplate> {
-  const config = workspace.getConfiguration("templagen");
-
-  const json = config.get("dirTemplates") as [];
+  const json = configGetDirTemplates();
   const templates: JsonTemplate[] = json.map((temp) =>
     JsonTemplate.fromJson(temp)
   );
@@ -31,7 +33,7 @@ function getTemplatesFromConfigTemplates(): Array<JsonTemplate> {
   return templates;
 }
 
-function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
+export function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
   let templates: Array<FolderTemplate> = [];
 
   try {
@@ -44,7 +46,8 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
         const path: string = `${templatesPath}\\${name}`;
         const settingFilePath: string = `${path}\\${folderTemplateSettingsFileName}`;
 
-        const settings: SettingsData = getTemplateSettings(settingFilePath);
+        const settings: FolderTemplateSettingsData =
+          readTemplaGenJson(settingFilePath);
 
         let templateName: string = name.trim();
         if (
@@ -61,7 +64,8 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
           settings.subDirNameCase,
           settings.foldersFilesNamesReplacer,
           settings.filesContentReplacer,
-          path
+          path,
+          settings.dirs
         );
       });
     }
@@ -76,6 +80,9 @@ function getTemplatesFromTemplatesFolderPath(): Array<FolderTemplate> {
 }
 
 function getFolderNamesInPath(path: string): string[] {
+  // TODO Imp nested folders
+  // Search all paths in folder until get templagen.json
+  // Return Name as [Path | SubPath | ... | Template Name]
   const folders = fs
     .readdirSync(path, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
@@ -86,33 +93,4 @@ function getFolderNamesInPath(path: string): string[] {
     )
     .map((dirent) => dirent.name);
   return folders;
-}
-
-type SettingsData = {
-  name?: string | undefined;
-  needSubDir: boolean | undefined;
-  subDirNameCase: string | undefined;
-  foldersFilesNamesReplacer?: Replacer[] | undefined;
-  filesContentReplacer?: Replacer[] | undefined;
-};
-
-function getTemplateSettings(path: string): SettingsData {
-  const dummy = {
-    needSubDir: false,
-    subDirNameCase: "",
-  };
-  try {
-    const fileContents = fs.readFileSync(path, "utf8");
-    if (fileContents) {
-      const data = JSON.parse(fileContents) as SettingsData;
-      return data;
-    }
-    return dummy;
-  } catch (error) {
-    window.showErrorMessage(
-      `Error:
-        ${error instanceof Error ? error.message : JSON.stringify(error)}`
-    );
-    return dummy;
-  }
 }

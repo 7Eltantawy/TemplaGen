@@ -3,7 +3,8 @@ export class TemplateBase {
     public name: string,
     public needSubDir: boolean | undefined,
     public subDirNameCase: string | undefined,
-    public foldersFilesNamesReplacer?: Replacer[] | undefined
+    public foldersFilesNamesReplacer: Replacer[] | undefined,
+    public dirs: Record<string, string[]> | undefined
   ) {}
 }
 
@@ -14,9 +15,10 @@ export class FolderTemplate extends TemplateBase {
     subDirNameCase: string | undefined,
     foldersFilesNamesReplacer: Replacer[] | undefined,
     public filesContentReplacer: Replacer[] | undefined,
-    public path: string
+    public path: string,
+    dirs: Record<string, string[]> | undefined
   ) {
-    super(name, needSubDir, subDirNameCase, foldersFilesNamesReplacer);
+    super(name, needSubDir, subDirNameCase, foldersFilesNamesReplacer, dirs);
   }
 }
 
@@ -26,9 +28,9 @@ export class JsonTemplate extends TemplateBase {
     needSubDir: boolean | undefined,
     subDirNameCase: string | undefined,
     foldersFilesNamesReplacer: Replacer[] | undefined,
-    public dirs: Record<string, string[]>
+    dirs: Record<string, string[]>
   ) {
-    super(name, needSubDir, subDirNameCase, foldersFilesNamesReplacer);
+    super(name, needSubDir, subDirNameCase, foldersFilesNamesReplacer, dirs);
   }
 
   static fromJson(json: any): JsonTemplate {
@@ -52,3 +54,12 @@ export interface ReplacerBody {
   nameToReplace: string;
   replaceWith: string;
 }
+
+export type FolderTemplateSettingsData = {
+  name?: string | undefined;
+  needSubDir: boolean | undefined;
+  subDirNameCase: string | undefined;
+  foldersFilesNamesReplacer?: Replacer[] | undefined;
+  filesContentReplacer?: Replacer[] | undefined;
+  dirs?: Record<string, string[]> | undefined;
+};
