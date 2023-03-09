@@ -11,10 +11,9 @@ import {
   FolderTemplate,
 } from "../interfaces/template";
 import {
-  configGetShowTemplatesGrouped,
+  configGetListShowTemplatesGrouped,
   configGetTemplatesFolderPath,
 } from "./config";
-// import { foldersSymbolSepartor } from "./constance";
 import * as pathUtils from "path";
 
 type QuickPickItemCustom<T> = QuickPickItem & {
@@ -25,7 +24,7 @@ type QuickPickItemCustom<T> = QuickPickItem & {
 export async function promptForSelectedTemplate(
   templates: Array<TemplateBase>
 ): Promise<TemplateBase | undefined> {
-  if (configGetShowTemplatesGrouped()) {
+  if (configGetListShowTemplatesGrouped()) {
     try {
       const data: QuickPickItemCustom<TemplateBase> | undefined =
         await promptForSelectedGroupedList(templates);

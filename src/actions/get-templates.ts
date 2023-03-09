@@ -8,8 +8,9 @@ import {
 import * as fs from "fs";
 import {
   configGetDirTemplates,
+  configGetListNameSeparatedBy,
+  configGetListShowTemplateNameAsPath,
   folderTemplateSettingsFileName,
-  foldersSymbolSepartor,
 } from "../utils";
 import * as _ from "lodash";
 import { readTemplaGenJson } from "./templagen-json-file";
@@ -47,6 +48,7 @@ export async function getTemplatesFromTemplatesFolderPath(): Promise<
     if (templatesPath) {
       const foldersName = await getFolderNamesInPath(templatesPath);
 
+      const nameSeparatedBy = configGetListNameSeparatedBy();
       templates = foldersName.map((name) => {
         const path: string = pathUtils.join(templatesPath, name);
         const settingFilePath: string = pathUtils.join(
@@ -57,9 +59,15 @@ export async function getTemplatesFromTemplatesFolderPath(): Promise<
         const settings: FolderTemplateSettingsData =
           readTemplaGenJson(settingFilePath);
 
-        let templateName: string = name
-          .trim()
-          .replace(new RegExp("/", "g"), foldersSymbolSepartor);
+        let templateName: string = "";
+        if (configGetListShowTemplateNameAsPath()) {
+          templateName = name
+            .trim()
+            .replace(new RegExp("/", "g"), nameSeparatedBy);
+        } else {
+          templateName = name.trim().split("/").reverse()[0];
+        }
+
         if (
           !_.isNil(settings.name) &&
           !_.isEmpty(settings.name) &&
