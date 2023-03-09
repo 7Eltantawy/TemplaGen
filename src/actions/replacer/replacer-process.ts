@@ -75,8 +75,6 @@ async function processFilesContentNames(
       });
     }
 
-    console.log(replacers);
-
     await renameFilesContent(moduleDirectoryPath, replacers);
   }
 }

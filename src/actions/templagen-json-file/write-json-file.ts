@@ -24,7 +24,6 @@ export async function writeToTemplaGenJson(template: FolderTemplate) {
 
     const flattenedSettingsDirs = flattenDirs(settings.dirs ?? {});
     settings.dirs = flattenedSettingsDirs;
-    console.log(flattenedSettingsDirs);
 
     const missedPaths: string[] = [];
     for (const path of Object.keys(flattenedSettingsDirs)) {
@@ -74,9 +73,7 @@ export async function writeToTemplaGenJson(template: FolderTemplate) {
     settings.dirs = Object.assign({}, dirs, settings.dirs);
     const newFileContent = JSON.stringify(settings, null, 2);
     await fs.writeFileSync(filePath, newFileContent, "utf8");
-  } catch (_) {
-    console.log(_);
-  }
+  } catch (_) {}
 }
 
 function flattenDirs(dirs: Record<string, string[]>): Record<string, string[]> {
