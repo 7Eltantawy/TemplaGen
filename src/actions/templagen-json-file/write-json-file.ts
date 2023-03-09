@@ -10,10 +10,14 @@ import {
 import { window } from "vscode";
 import { createDirectory } from "../dir-generator/create-dir";
 import { getAllFolderPaths } from "../../utils/get-folders-paths";
+import * as pathUtils from "path";
 
 export async function writeToTemplaGenJson(template: FolderTemplate) {
   try {
-    const filePath = `${template.path}\\${folderTemplateSettingsFileName}`;
+    const filePath = pathUtils.join(
+      template.path,
+      folderTemplateSettingsFileName
+    );
 
     const fileContents = await fs.readFileSync(filePath, "utf-8");
     let settings = JSON.parse(fileContents) as FolderTemplateSettingsData;
@@ -24,7 +28,7 @@ export async function writeToTemplaGenJson(template: FolderTemplate) {
 
     const missedPaths: string[] = [];
     for (const path of Object.keys(flattenedSettingsDirs)) {
-      if (!fs.existsSync(`${template.path}\\${path}`)) {
+      if (!fs.existsSync(pathUtils.join(template.path, path))) {
         missedPaths.push(path);
       }
     }
@@ -46,7 +50,7 @@ export async function writeToTemplaGenJson(template: FolderTemplate) {
       // Create
       else if (createMissied) {
         for (const path of missedPaths) {
-          createDirectory(`${template.path}\\${path}`);
+          createDirectory(pathUtils.join(template.path, path));
         }
       }
       // Remove

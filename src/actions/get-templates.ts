@@ -13,6 +13,7 @@ import {
 import * as _ from "lodash";
 import { readTemplaGenJson } from "./templagen-json-file";
 import { getAllFolderPaths } from "../utils/get-folders-paths";
+import * as pathUtils from "path";
 
 export async function getTemplates(): Promise<Array<TemplateBase>> {
   let templates: Array<TemplateBase> = [];
@@ -46,8 +47,11 @@ export async function getTemplatesFromTemplatesFolderPath(): Promise<
       const foldersName = await getFolderNamesInPath(templatesPath);
 
       templates = foldersName.map((name) => {
-        const path: string = `${templatesPath}\\${name}`;
-        const settingFilePath: string = `${path}\\${folderTemplateSettingsFileName}`;
+        const path: string = pathUtils.join(templatesPath, name);
+        const settingFilePath: string = pathUtils.join(
+          path,
+          folderTemplateSettingsFileName
+        );
 
         const settings: FolderTemplateSettingsData =
           readTemplaGenJson(settingFilePath);
@@ -86,7 +90,7 @@ async function getFolderNamesInPath(path: string): Promise<string[]> {
   const folders = await getAllFolderPaths(path);
 
   const filteredFolders = folders.filter((dirent) =>
-    fs.existsSync(`${path}\\${dirent}\\${folderTemplateSettingsFileName}`)
+    fs.existsSync(pathUtils.join(path, dirent, folderTemplateSettingsFileName))
   );
 
   return filteredFolders;
