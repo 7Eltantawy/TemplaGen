@@ -108,7 +108,7 @@
               }
             }
           ],
-          "description": "Directories templates."
+          "description": "Json templates definitions."
         }
       }
     }
