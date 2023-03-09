@@ -10,7 +10,7 @@ Configure once create everywhere.
 
 <div align="left">
 
-## How to use?
+## How to use extension?
 
 - Install extension.
 - Right click on any folder slecet `TemplaGen | Template Maker`.
@@ -19,9 +19,19 @@ Configure once create everywhere.
 - Select template u want for example `Flutter clean code`.
 - You're done.
 
+## Community
+
+- [Ready to use Templates](https://github.com/HasanEltantawy/TemplaGen-Templates)
+
+- #### How to use templates?
+  - Clone repo on your local machine.
+  - Copy `templates` folder path to `templagen` -> `Templates Folder Path` in vscode settings.
+- #### Share your templates with community.
+  - Create custom template then make pull request to share with community.
+
 ## How to setup your own template?
 
-### Folder way
+#### Folder way
 
 - First
   - Create Folder for templates anywhere on your device.
@@ -63,7 +73,7 @@ Configure once create everywhere.
 
   - Create any folders or files in the folder as you like.
 
-### Json way
+#### Json way
 
 - Open vscode settings
 - search for `templagen`
@@ -201,7 +211,7 @@ The output dir will be like
     }
   ```
 
-### Replacer schema
+#### Replacer schema
 
 - `case`the case of the name to replace `nameToReplace` with.
 - `nameToReplace`the key you define to be replaced.
