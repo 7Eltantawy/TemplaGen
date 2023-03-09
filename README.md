@@ -5,6 +5,7 @@
 # TemplaGen
 
 ![Badge](https://img.shields.io/github/v/release/HasanEltantawy/TemplaGen)
+[![Wiki](https://img.shields.io/badge/Wiki-GitHub-green.svg)](https://github.com/HasanEltantawy/TemplaGen/wiki)
 
 Configure once create everywhere.
 
