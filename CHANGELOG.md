@@ -2,6 +2,8 @@
 
 # v0.0.6
 
+- Group FolderTemplates into folders
+  - For example create `Flutter` Folder and inside it create `bloc` template and `cubit` template and so on.
 - Use `name` property to overwrite FolderTemplate name to define the name as you want and use special charachters.
 - Use `dirs` in `templagen.json` note that
   1- Folders is the refrence.
