@@ -126,7 +126,7 @@ The output dir will be like
 
 ## Docs
 
-### `name`
+#### `name`
 
 - is the name of template to be select when create template
 
@@ -137,7 +137,7 @@ The output dir will be like
 "name": "Flutter Clean Code"
 ```
 
-### `needSubDir`
+#### `needSubDir`
 
 - check wheter the template directories required subDir to created in or not.
 - if `true` you'll be asked for subDir name.
@@ -148,7 +148,7 @@ The output dir will be like
 
 ```
 
-### `subDirNameCase`
+#### `subDirNameCase`
 
 - the name case you want
 
@@ -156,7 +156,7 @@ The output dir will be like
   "needSubDir": "snakeCase",
   ```
 
-### `foldersFilesNamesReplacer`
+#### `foldersFilesNamesReplacer`
 
 - define keys in dirs and files name to be replaced later
 
@@ -174,7 +174,7 @@ The output dir will be like
      }
   ```
 
-### `filesContentReplacer`
+#### `filesContentReplacer`
 
 - define keys inside files content to be replaced later
 
@@ -198,19 +198,20 @@ The output dir will be like
        }
   ```
 
-### `dirs`
+#### `dirs`
 
 - the dirs which will be created
 
-### `JsonTemplate`
+`JsonTemplate`
 
 - use to define yor template folder structure.
 - U can use long path to define folders in folder like:
 - `Fold/01/02/03/04`
 - This will create Directory `Fold` and create `01` in it and create `02` in `01` and so on.
 
-From `v0.0.6` and above u can use this in `templagen.json` note that
+`FolderTemplate`
 
+- From `v0.0.6` and above u can use this in `templagen.json` note that
 - Folders is the refrence.
 - Any folder not in dirs will be added automatically when create the template.
 - Any path defined in `dirs` but not in folder you will be asked whether to create its directory or remove paths from `dirs` in `templagen.json`.
@@ -247,17 +248,40 @@ From `v0.0.6` and above u can use this in `templagen.json` note that
 
 ## Available cases
 
+- The following docs of cases copied from [change-case](https://github.com/blakeembrey/change-case/blob/master/README.md) packages
 - `camelCase`
+  - Transform into a string with the separator denoted by the next word capitalized.
+  - test string |-> testString
 - `capitalCase`
+  - Transform into a space separated string with each word capitalized.
+  - test string |-> Test String
 - `constantCase`
+  - Transform into upper case string with an underscore between words.
+  - test string |-> TEST_STRING
 - `dotCase`
+  - Transform into a lower case string with a period between words.
+  - test string |-> test.string
 - `headerCase`
+  - Transform into a dash separated string of capitalized words.
+  - test string |-> Test-String
 - `noCase`
+  - Transform into a lower cased string with spaces between words.
+  - testString |-> test string
 - `paramCase`
+  - Transform into a lower cased string with dashes between words.
+  - test string |-> test-string
 - `pascalCase`
+  - Transform into a string of capitalized words without separators.
+  - test string |-> TestString
 - `pathCase`
+  - Transform into a lower case string with slashes between words.
+  - test string |-> test/string
 - `sentenceCase`
+  - Transform into a lower case with spaces between words, then capitalize the string.
+  - testString |-> Test string
 - `snakeCase`
+  - Transform into a lower case string with underscores between words.
+  - test string |-> test_string
 
 ## Extension settings
 
