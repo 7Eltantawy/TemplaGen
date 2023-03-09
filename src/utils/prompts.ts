@@ -10,21 +10,39 @@ import {
   JsonTemplate,
   FolderTemplate,
 } from "../interfaces/template";
+import {
+  configGetShowTemplatesGrouped,
+  configGetTemplatesFolderPath,
+} from "./config";
+// import { foldersSymbolSepartor } from "./constance";
+import * as pathUtils from "path";
 
 type QuickPickItemCustom<T> = QuickPickItem & {
   data: T;
+  groupName?: string;
 };
 
 export async function promptForSelectedTemplate(
   templates: Array<TemplateBase>
 ): Promise<TemplateBase | undefined> {
-  const data: QuickPickItemCustom<TemplateBase> | undefined =
-    await promptForSelected(templates);
+  if (configGetShowTemplatesGrouped()) {
+    try {
+      const data: QuickPickItemCustom<TemplateBase> | undefined =
+        await promptForSelectedGroupedList(templates);
 
-  return data?.data;
+      return data?.data;
+    } catch (_) {
+      console.log(_);
+    }
+  } else {
+    const data: QuickPickItemCustom<TemplateBase> | undefined =
+      await promptForSelectedSeparetedList(templates);
+
+    return data?.data;
+  }
 }
 
-function promptForSelected(
+function promptForSelectedSeparetedList(
   templates: Array<TemplateBase>
 ): Thenable<QuickPickItemCustom<TemplateBase> | undefined> {
   const items: QuickPickItemCustom<TemplateBase>[] = templates.map(
@@ -43,6 +61,93 @@ function promptForSelected(
     matchOnDescription: true,
     title: "Pick template to start",
   });
+}
+
+async function promptForSelectedGroupedList(
+  templates: Array<TemplateBase>,
+  currentFolder?: string
+): Promise<QuickPickItemCustom<TemplateBase> | undefined> {
+  const grouped: Record<string, TemplateBase[]> = {};
+
+  // Group
+  templates.map((template) => {
+    if (template instanceof FolderTemplate) {
+      let relativeTo = configGetTemplatesFolderPath();
+
+      if (currentFolder) {
+        relativeTo = currentFolder;
+      }
+
+      const real = pathUtils.relative(relativeTo, template.path);
+      const splitted = real.split("\\");
+
+      if (splitted.length > 0) {
+        const keyExist = Object.keys(grouped).includes(splitted[0]);
+        if (keyExist) {
+          grouped[splitted[0]].push(template);
+        } else {
+          grouped[splitted[0]] = [];
+          grouped[splitted[0]].push(template);
+        }
+      } else {
+        grouped[template.name] = [];
+      }
+    } else if (template instanceof JsonTemplate) {
+      grouped[template.name] = [template];
+    }
+  });
+
+  // Generate items
+  const items: QuickPickItemCustom<TemplateBase | TemplateBase[]>[] =
+    Object.keys(grouped).map((groupName) => {
+      const templatesList: TemplateBase[] = grouped[groupName];
+      if (templatesList.length > 1) {
+        const item: QuickPickItemCustom<TemplateBase | TemplateBase[]> = {
+          label: groupName,
+          data: templatesList,
+          detail: "Group",
+          groupName: groupName,
+        };
+        return item;
+      } else {
+        const item: QuickPickItemCustom<TemplateBase> = {
+          label: templatesList[0].name,
+          data: templatesList[0],
+          detail: detailMaker(templatesList[0]),
+        };
+        return item;
+      }
+    });
+
+  // Await for result
+  const result: QuickPickItemCustom<TemplateBase | TemplateBase[]> | undefined =
+    await window.showQuickPick(items, {
+      placeHolder: "Select template",
+      matchOnDescription: true,
+      title: "Pick template to start",
+    });
+
+  // Check result
+  if (result === undefined) {
+    return;
+  } else if (result.data instanceof TemplateBase) {
+    return result as QuickPickItemCustom<TemplateBase>;
+  } else if (
+    Array.isArray(result.data) &&
+    result.data.every((item) => item instanceof TemplateBase)
+  ) {
+    if (_.isNil(currentFolder)) {
+      return promptForSelectedGroupedList(
+        result.data,
+        pathUtils.join(configGetTemplatesFolderPath(), result.groupName ?? "")
+      );
+    } else {
+      return promptForSelectedGroupedList(
+        result.data,
+        pathUtils.join(currentFolder!, result.groupName!)
+      );
+    }
+  }
 }
 
 function detailMaker(template: TemplateBase): string {

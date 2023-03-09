@@ -9,6 +9,7 @@ import * as fs from "fs";
 import {
   configGetDirTemplates,
   folderTemplateSettingsFileName,
+  foldersSymbolSepartor,
 } from "../utils";
 import * as _ from "lodash";
 import { readTemplaGenJson } from "./templagen-json-file";
@@ -58,7 +59,7 @@ export async function getTemplatesFromTemplatesFolderPath(): Promise<
 
         let templateName: string = name
           .trim()
-          .replace(new RegExp("/", "g"), " -> ");
+          .replace(new RegExp("/", "g"), foldersSymbolSepartor);
         if (
           !_.isNil(settings.name) &&
           !_.isEmpty(settings.name) &&
