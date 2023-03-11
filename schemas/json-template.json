@@ -4,10 +4,90 @@
   "properties": {
     "templagen.dirTemplates": {
       "type": "array",
-      "title": "JsonTemplate",
+      "title": "JsonTemplates",
       "items": {
-        "type": "object"
+        "$ref": "#/definitions/JsonTemplate"
       }
+    }
+  },
+  "definitions": {
+    "JsonTemplate": {
+      "title": "JsonTemplate",
+      "properties": {
+        "name": {
+          "title": "name",
+          "type": "string",
+          "description": "The name of template to be select when create template\noverwrite folder name if not empty or whitespace"
+        },
+        "needSubDir": {
+          "title": "needSubDir",
+          "type": "boolean",
+          "description": "check wheter the template directories required subDir to created in or not.\nif true you'll be asked for subDir name.\nif false the dirs will be created directly."
+        },
+        "subDirNameCase": {
+          "$ref": "#/definitions/Case"
+        },
+        "foldersFilesNamesReplacer": {
+          "title": "foldersFilesNamesReplacer",
+          "type": "array",
+          "description": "Define keys in dirs and files name to be replaced later",
+          "items": {
+            "$ref": "#/definitions/Replacer"
+          }
+        },
+        "dirs": {
+          "title": "dirs",
+          "type": "object",
+          "description": "The dirs which will be created",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": ["name", "needSubDir", "subDirNameCase", "dirs"]
+    },
+
+    "Replacer": {
+      "title": "Replacer",
+      "type": "object",
+      "properties": {
+        "case": {
+          "$ref": "#/definitions/Case"
+        },
+        "nameToReplace": {
+          "title": "nameToReplace",
+          "description": "The key you define to be replaced.",
+          "type": "string"
+        },
+        "useSubDirName": {
+          "title": "useSubDirName",
+          "description": "Choose wheter to use the subDirName or not\nif set to false or needSubDir set to false you will be asked to enter a name to replace the key with",
+          "type": "boolean"
+        }
+      },
+      "required": ["nameToReplace", "useSubDirName"]
+    },
+
+    "Case": {
+      "type": "string",
+      "title": "Case",
+      "description": "The case of the name to replace nameToReplace with.",
+      "enum": [
+        "camelCase",
+        "capitalCase",
+        "constantCase",
+        "dotCase",
+        "headerCase",
+        "noCase",
+        "paramCase",
+        "pascalCase",
+        "pathCase",
+        "sentenceCase",
+        "snakeCase"
+      ]
     }
   }
 }
