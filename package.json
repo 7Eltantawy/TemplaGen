@@ -38,6 +38,12 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "jsonValidation": [
+      {
+        "fileMatch": "templagen.json",
+        "url": "./schemas/templagen.json"
+      }
+    ],
     "commands": [
       {
         "command": "extension.template-maker",

@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FolderTemplate",
+  "description": "TemplaGen vscode extension",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "needSubDir": {
+      "type": "boolean"
+    },
+    "subDirNameCase": {
+      "type": "string"
+    },
+    "foldersFilesNamesReplacer": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Replacer"
+      }
+    },
+    "filesContentReplacer": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Replacer"
+      }
+    },
+    "dirs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": ["name", "needSubDir", "subDirNameCase"],
+  "definitions": {
+    "Replacer": {
+      "type": "object",
+      "properties": {
+        "case": {
+          "type": "string",
+          "enum": [
+            "camelCase",
+            "capitalCase",
+            "constantCase",
+            "dotCase",
+            "headerCase",
+            "noCase",
+            "paramCase",
+            "pascalCase",
+            "pathCase",
+            "sentenceCase",
+            "snakeCase"
+          ]
+        },
+        "nameToReplace": {
+          "type": "string"
+        },
+        "useSubDirName": {
+          "type": "boolean"
+        }
+      },
+      "required": ["nameToReplace", "useSubDirName"]
+    }
+  }
+}
