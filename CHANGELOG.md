@@ -5,6 +5,7 @@
 #### Features
 
 - You can write `templagen.json` with ease and get suggestions when opening it in vscode.
+- Add validation to `templagen.dirTemplates` when writing jsonTemplate in vscode settings.json.
 
 # v0.0.6
 
