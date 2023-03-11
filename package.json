@@ -41,7 +41,7 @@
     "jsonValidation": [
       {
         "fileMatch": "templagen.json",
-        "url": "./schemas/templagen.json"
+        "url": "./schemas/folder-template.json"
       }
     ],
     "commands": [
