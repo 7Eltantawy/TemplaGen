@@ -1,5 +1,11 @@
 <!-- TODO every release -->
 
+# v0.0.7
+
+#### Features
+
+- You can write `templagen.json` with ease and get suggestions when opening it in vscode.
+
 # v0.0.6
 
 #### Features
