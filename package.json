@@ -40,8 +40,16 @@
   "contributes": {
     "jsonValidation": [
       {
-        "fileMatch": "templagen.json",
+        "fileMatch": [
+          "templagen.json"
+        ],
         "url": "./schemas/folder-template.json"
+      },
+      {
+        "fileMatch": [
+          "settings.json"
+        ],
+        "url": "./schemas/json-template.json"
       }
     ],
     "commands": [
